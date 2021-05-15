@@ -55,6 +55,7 @@ def download2(url,rpt_title):
     keys = root.xpath("//span[contains(@class,'b1')]")
     values = root.xpath("//span[contains(@class,'b1')]/following::text()[1]")
     data = {}
+    data["活动院系："] = "无院系"
     for i in range(len(keys)):
         value = values[i].strip()
         value = " ".join(value.split())
@@ -64,8 +65,9 @@ def download2(url,rpt_title):
 
 def report(rpt_title,data):
     College = data["活动院系："]
+
     # 计算机科学与信息工程学院
-    if "全部" == College or "计算机科学与信息工程学院" == College:
+    if "全部" == College or "计算机科学与信息工程学院" == College or "无院系" == College:
         json1 = {
         "at": {
             "isAtAll": "True"
@@ -99,7 +101,6 @@ def report(rpt_title,data):
         }
         prt_url = "https://oapi.dingtalk.com/robot/send?access_token=8cbb333c41299e6abe3b9957e00600e7b9b2eaaeb8165ad0e19bc9b59179bbe6"
         requests.post(url=prt_url, headers=header, json=json)
-print("部署成功")
 while True:
     time.sleep(5)
     main()
