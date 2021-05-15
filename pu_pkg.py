@@ -2,7 +2,8 @@ import time
 
 import requests
 from lxml import etree
-cookie = "PHPSESSID=3dcafe60609f1e0f9b6f1; Hm_lvt_dd3ea352543392a029ccf9da1be54a50=1619411738,1621005230,1621040655; TS_LOGGED_USER=mNlQnzJAsO7hvNWQNO4K5RARa; Hm_lpvt_dd3ea352543392a029ccf9da1be54a50=1621043995"
+cookie = "这里放你的cookie"
+prt_url = "这里放你的钉钉机器人API"
 header = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36",
     "cookie": cookie,
@@ -22,7 +23,7 @@ def main():
         print("捕获到文件异常 执行覆盖写入操作")
         is_new = True
     titles = download1("https://ayit.pocketuni.net/index.php?app=event&mod=School&act=board")
-    # titles = download1("http://127.0.0.1")
+    #titles = download1("http://127.0.0.1")
     for title in titles:
         if title.text in after:
             pass
@@ -39,14 +40,7 @@ def main():
                 f3.write(title.text)
                 f3.write("\n")
                 print(title.text)
-    json = {
-            "text": {
-                "content": "定时任务执行中"
-            },
-            "msgtype": "text"
-        }
-    prt_url = "https://oapi.dingtalk.com/robot/send?access_token=8cbb333c41299e6abe3b9957e00600e7b9b2eaaeb8165ad0e19bc9b59179bbe6"
-    requests.post(url=prt_url, headers=header, json=json)
+
 def download1(url):
     res = requests.get(url=url, headers=header)
     res.encoding="utf-8"
@@ -95,7 +89,6 @@ def report(rpt_title,data):
             },
 
         }
-        prt_url = "https://oapi.dingtalk.com/robot/send?access_token=8cbb333c41299e6abe3b9957e00600e7b9b2eaaeb8165ad0e19bc9b59179bbe6"
         requests.post(url=prt_url, headers=header, json=json1)
         requests.post(url=prt_url, headers=header, json=json2)
 
@@ -106,8 +99,8 @@ def report(rpt_title,data):
             },
             "msgtype": "text"
         }
-        prt_url = "https://oapi.dingtalk.com/robot/send?access_token=8cbb333c41299e6abe3b9957e00600e7b9b2eaaeb8165ad0e19bc9b59179bbe6"
         requests.post(url=prt_url, headers=header, json=json)
 while True:
     time.sleep(30)
+    print("check")
     main()
