@@ -101,6 +101,4 @@ def report(rpt_title,data):
         }
         prt_url = "https://oapi.dingtalk.com/robot/send?access_token=8cbb333c41299e6abe3b9957e00600e7b9b2eaaeb8165ad0e19bc9b59179bbe6"
         requests.post(url=prt_url, headers=header, json=json)
-while True:
-    time.sleep(5)
-    main()
+main()
